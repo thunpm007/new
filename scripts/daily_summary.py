@@ -65,7 +65,7 @@ SUMMARIES_DIR = "summaries"
 
 # ชื่อโมเดล Gemini — เปลี่ยนได้ถ้าต้องการรุ่นอื่น (ดูรายชื่อที่ใช้ได้ที่
 # https://ai.google.dev/gemini-api/docs/models)
-GEMINI_MODEL = "gemini-2.5-flash"
+GEMINI_MODEL = "gemini-flash-latest"
 GEMINI_API_URL = (
     f"https://generativelanguage.googleapis.com/v1beta/models/"
     f"{GEMINI_MODEL}:generateContent"
@@ -147,7 +147,7 @@ def summarize_with_gemini(articles: list[dict]) -> dict:
     api_key = os.environ["GEMINI_API_KEY"]
 
     payload = {
-        "system_instruction": {"parts": [{"text": SYSTEM_PROMPT}]},
+        "systemInstruction": {"parts": [{"text": SYSTEM_PROMPT}]},
         "contents": [
             {"role": "user", "parts": [{"text": f"ข่าววันนี้:\n\n{numbered}"}]}
         ],
