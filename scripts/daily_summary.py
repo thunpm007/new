@@ -153,8 +153,9 @@ def summarize_with_gemini(articles: list[dict]) -> dict:
         ],
         "generationConfig": {
             "temperature": 0.3,
-            "maxOutputTokens": 2000,
+            "maxOutputTokens": 8192,
             "responseMimeType": "application/json",
+            "thinkingConfig": {"thinkingBudget": 0},
         },
     }
     data = json.dumps(payload).encode("utf-8")
@@ -173,7 +174,12 @@ def summarize_with_gemini(articles: list[dict]) -> dict:
 
     text = result["candidates"][0]["content"]["parts"][0]["text"].strip()
     text = re.sub(r"^```(json)?|```$", "", text.strip(), flags=re.MULTILINE).strip()
-    return json.loads(text)
+    try:
+        return json.loads(text)
+    except json.JSONDecodeError:
+        print("  [เตือน] แปลง JSON จาก Gemini ไม่สำเร็จ ข้อความที่ได้กลับมา:")
+        print(text)
+        raise
 
 
 def render_markdown(summary: dict, articles: list[dict], date_str: str) -> str:
