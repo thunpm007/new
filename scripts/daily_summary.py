@@ -151,11 +151,10 @@ def summarize_with_gemini(articles: list[dict]) -> dict:
         "contents": [
             {"role": "user", "parts": [{"text": f"ข่าววันนี้:\n\n{numbered}"}]}
         ],
-        "generationConfig": {
+       "generationConfig": {
             "temperature": 0.3,
             "maxOutputTokens": 8192,
             "responseMimeType": "application/json",
-            "thinkingConfig": {"thinkingBudget": 0},
         },
     }
     data = json.dumps(payload).encode("utf-8")
