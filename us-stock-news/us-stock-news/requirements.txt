@@ -1,1 +1,0 @@
-# ไม่มี dependency เพิ่มเติม — สคริปต์ใช้ urllib ในตัว Python เรียก Gemini API โดยตรง
